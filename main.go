@@ -1,12 +1,15 @@
 package main
 
 import (
-	"fmt"
+	"os"
+	"reviewservice/app"
 	"reviewservice/config"
+	db "reviewservice/db/repository"
 )
 
 func main() {
 	config.Load()
-	fmt.Println("aksndlkansdl")
-	config.SetupDb()
+	cnf:=app.NewConfig(os.Getenv("PORT"))
+	app:=app.NewApplication(cnf,db.Storage{})
+	app.Run()
 }
